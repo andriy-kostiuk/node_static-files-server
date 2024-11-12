@@ -12,7 +12,7 @@ function createServer() {
 
     if (!url.pathname.startsWith('/file')) {
       res.statusCode = 400;
-      res.statusMessage = 'Path should start with "/file/';
+      res.statusMessage = 'Path should start with "/file/"';
       res.end();
 
       return;
@@ -22,7 +22,7 @@ function createServer() {
 
     if (requestedPath.includes('//')) {
       res.statusCode = 404;
-      res.statusMessage = 'File path should not include double-slash';
+      res.statusMessage = 'Invalid file path: double slashes are not allowed.';
       res.end();
 
       return;
@@ -37,7 +37,6 @@ function createServer() {
       res.end(file);
     } catch (error) {
       res.statusCode = 404;
-      res.statusMessage = '404 Not found';
       res.end('404 Not found');
     }
   });
